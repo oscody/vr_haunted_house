@@ -22,33 +22,23 @@ function stockAssetUrl(assetId: string, fileName: string): string {
 }
 
 export default defineAssets({
-  'environment-desk': {
-    url: stockAssetUrl('environment-desk', 'environmentDesk.gltf'),
-    type: AssetType.GLTF,
-    name: 'Environment Desk',
-    priority: 'lazy',
-  },
-  'plant-sansevieria': {
-    url: stockAssetUrl('plant-sansevieria', 'plantSansevieria.gltf'),
-    type: AssetType.GLTF,
-    name: 'Plant Sansevieria',
-    priority: 'lazy',
-  },
-  robot: {
-    url: stockAssetUrl('robot', 'robot.gltf'),
-    type: AssetType.GLTF,
-    name: 'Robot',
-    priority: 'lazy',
-  },
-  'welcome-panel': {
-    url: publicAssetUrl('ui/welcome.uikitml'),
-    type: AssetType.UIKitML,
-    name: 'Welcome Panel',
-  },
-  'webxr-banner': {
-    url: publicAssetUrl('gltf/webxr-banner/banner.gltf'),
-    type: AssetType.GLTF,
-    name: 'WebXR Banner',
-    priority: 'lazy',
-  },
+  // Register assets here, e.g.:
+  //
+  // 'my-model': {
+  //   url: publicAssetUrl('gltf/my-model/model.gltf'),
+  //   type: AssetType.GLTF,
+  //   name: 'My Model',
+  //   priority: 'lazy',
+  // },
+  //
+  // 'stock-model': {
+  //   url: stockAssetUrl('robot', 'robot.gltf'),
+  //   type: AssetType.GLTF,
+  //   name: 'Stock Model',
+  // },
 });
+
+// Keep the URL helpers reachable while the manifest is empty.
+void publicAssetUrl;
+void stockAssetUrl;
+void AssetType;
