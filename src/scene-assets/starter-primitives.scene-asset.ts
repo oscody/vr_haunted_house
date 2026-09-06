@@ -6,6 +6,8 @@
  */
 
 import {
+  BoxGeometry,
+  Group,
   Mesh,
   MeshStandardMaterial,
   PlaneGeometry,
@@ -24,3 +26,11 @@ export const floor = new Mesh(
 );
 floor.name = 'Floor';
 floor.rotation.x = -Math.PI * 0.5;
+
+export const house = new Group();
+house.name = 'House';
+
+const walls = new Mesh(new BoxGeometry(4, 2.5, 4), new MeshStandardMaterial());
+walls.name = 'Walls';
+walls.position.y += 1.25;
+house.add(walls);

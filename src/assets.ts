@@ -8,6 +8,7 @@
 import { AssetType, defineAssets } from '@iwsdk/core';
 import {
   floor,
+  house,
   temporarySphere,
 } from './scene-assets/starter-primitives.scene-asset.js';
 
@@ -27,6 +28,7 @@ function stockAssetUrl(assetId: string, fileName: string): string {
 
 export default defineAssets({
   floor,
+  house,
   'temporary-sphere': temporarySphere,
   'welcome-panel': {
     url: publicAssetUrl('ui/welcome.uikitml'),

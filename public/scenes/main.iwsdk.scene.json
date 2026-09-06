@@ -56,6 +56,19 @@
       }
     },
     {
+      "id": "house",
+      "name": "House",
+      "content": {
+        "type": "asset",
+        "asset": "house",
+        "castShadow": true,
+        "receiveShadow": true
+      },
+      "transform": {
+        "position": [0, 0, -3]
+      }
+    },
+    {
       "id": "temporary-sphere",
       "name": "Temporary sphere",
       "content": {
