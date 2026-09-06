@@ -7,10 +7,12 @@
 
 import {
   BoxGeometry,
+  ConeGeometry,
   Group,
   Mesh,
   MeshStandardMaterial,
   PlaneGeometry,
+  RepeatWrapping,
   SRGBColorSpace,
   SphereGeometry,
   TextureLoader,
@@ -32,6 +34,25 @@ const wallNormalTexture = textureLoader.load(
 );
 
 wallColorTexture.colorSpace = SRGBColorSpace;
+
+const roofColorTexture = textureLoader.load(
+  publicAssetUrl('textures/roof_slates_02_diff_1k.webp'),
+);
+const roofARMTexture = textureLoader.load(
+  publicAssetUrl('textures/roof_slates_02_arm_1k.webp'),
+);
+const roofNormalTexture = textureLoader.load(
+  publicAssetUrl('textures/roof_slates_02_nor_gl_1k.webp'),
+);
+
+roofColorTexture.colorSpace = SRGBColorSpace;
+roofColorTexture.repeat.set(3, 1);
+roofARMTexture.repeat.set(3, 1);
+roofNormalTexture.repeat.set(3, 1);
+
+roofColorTexture.wrapS = RepeatWrapping;
+roofARMTexture.wrapS = RepeatWrapping;
+roofNormalTexture.wrapS = RepeatWrapping;
 
 export const temporarySphere = new Mesh(
   new SphereGeometry(1, 32, 32),
@@ -62,3 +83,18 @@ const walls = new Mesh(
 walls.name = 'Walls';
 walls.position.y += 1.25;
 house.add(walls);
+
+const roof = new Mesh(
+  new ConeGeometry(3.5, 1.5, 4),
+  new MeshStandardMaterial({
+    map: roofColorTexture,
+    aoMap: roofARMTexture,
+    roughnessMap: roofARMTexture,
+    metalnessMap: roofARMTexture,
+    normalMap: roofNormalTexture,
+  }),
+);
+roof.name = 'Roof';
+roof.position.y = 2.5 + 0.75;
+roof.rotation.y = Math.PI * 0.25;
+house.add(roof);
