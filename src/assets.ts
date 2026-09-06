@@ -6,6 +6,10 @@
  */
 
 import { AssetType, defineAssets } from '@iwsdk/core';
+import {
+  temporarySphere,
+  xrSupportFloor,
+} from './scene-assets/starter-primitives.scene-asset.js';
 
 const publicAssetUrl = (filePath: string): string =>
   `${import.meta.env.BASE_URL}${filePath.replace(/^\/+/u, '')}`;
@@ -22,6 +26,13 @@ function stockAssetUrl(assetId: string, fileName: string): string {
 }
 
 export default defineAssets({
+  'temporary-sphere': temporarySphere,
+  'xr-support-floor': xrSupportFloor,
+  'welcome-panel': {
+    url: publicAssetUrl('ui/welcome.uikitml'),
+    type: AssetType.UIKitML,
+    name: 'Welcome panel',
+  },
   // Register assets here, e.g.:
   //
   // 'my-model': {
@@ -41,4 +52,3 @@ export default defineAssets({
 // Keep the URL helpers reachable while the manifest is empty.
 void publicAssetUrl;
 void stockAssetUrl;
-void AssetType;
