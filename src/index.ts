@@ -10,11 +10,13 @@ import projectOptions from 'virtual:iwsdk-project';
 import { DebugGuiSystem } from './debug-gui.js';
 import { PanelSystem } from './panel.js';
 import { RobotSystem } from './robot.js';
+import { OrbitControlsSystem } from './orbit-controls-system.js';
 
 World.create(
   document.getElementById('scene-container') as HTMLDivElement,
   projectOptions,
 ).then((world) => {
+  world.registerSystem(OrbitControlsSystem);
   world.registerSystem(DebugGuiSystem);
   world.registerSystem(RobotSystem);
   world.registerSystem(PanelSystem);
