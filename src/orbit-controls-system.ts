@@ -8,6 +8,14 @@
 import { createSystem, VisibilityState } from '@iwsdk/core';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
+export const orbitControlsDebugState = {
+  target: {
+    x: 0,
+    y: 1,
+    z: -3,
+  },
+};
+
 export class OrbitControlsSystem extends createSystem() {
   private controls?: OrbitControls;
 
@@ -35,10 +43,20 @@ export class OrbitControlsSystem extends createSystem() {
     const canvas = this.world.renderer.domElement;
     this.controls = new OrbitControls(this.world.camera, canvas);
     this.controls.enableDamping = true;
+    this.controls.target.set(
+      orbitControlsDebugState.target.x,
+      orbitControlsDebugState.target.y,
+      orbitControlsDebugState.target.z,
+    );
   }
 
   update() {
     // Only update if controls exist and are active
+    this.controls?.target.set(
+      orbitControlsDebugState.target.x,
+      orbitControlsDebugState.target.y,
+      orbitControlsDebugState.target.z,
+    );
     this.controls?.update();
   }
 }
