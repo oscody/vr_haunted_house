@@ -11,8 +11,27 @@ import {
   Mesh,
   MeshStandardMaterial,
   PlaneGeometry,
+  SRGBColorSpace,
   SphereGeometry,
+  TextureLoader,
 } from '@iwsdk/core';
+
+const publicAssetUrl = (filePath: string): string =>
+  `${import.meta.env.BASE_URL}${filePath.replace(/^\/+/u, '')}`;
+
+const textureLoader = new TextureLoader();
+
+const wallColorTexture = textureLoader.load(
+  publicAssetUrl('textures/castle_brick_broken_06_diff_1k.webp'),
+);
+const wallARMTexture = textureLoader.load(
+  publicAssetUrl('textures/castle_brick_broken_06_arm_1k.webp'),
+);
+const wallNormalTexture = textureLoader.load(
+  publicAssetUrl('textures/castle_brick_broken_06_nor_gl_1k.webp'),
+);
+
+wallColorTexture.colorSpace = SRGBColorSpace;
 
 export const temporarySphere = new Mesh(
   new SphereGeometry(1, 32, 32),
@@ -30,7 +49,16 @@ floor.rotation.x = -Math.PI * 0.5;
 export const house = new Group();
 house.name = 'House';
 
-const walls = new Mesh(new BoxGeometry(4, 2.5, 4), new MeshStandardMaterial());
+const walls = new Mesh(
+  new BoxGeometry(4, 2.5, 4),
+  new MeshStandardMaterial({
+    map: wallColorTexture,
+    aoMap: wallARMTexture,
+    roughnessMap: wallARMTexture,
+    metalnessMap: wallARMTexture,
+    normalMap: wallNormalTexture,
+  }),
+);
 walls.name = 'Walls';
 walls.position.y += 1.25;
 house.add(walls);
