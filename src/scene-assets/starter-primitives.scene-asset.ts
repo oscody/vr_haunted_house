@@ -6,9 +6,9 @@
  */
 
 import {
-  CircleGeometry,
   Mesh,
   MeshStandardMaterial,
+  PlaneGeometry,
   SphereGeometry,
 } from '@iwsdk/core';
 
@@ -18,9 +18,9 @@ export const temporarySphere = new Mesh(
 );
 temporarySphere.name = 'Temporary sphere';
 
-export const xrSupportFloor = new Mesh(
-  new CircleGeometry(7, 48),
-  new MeshStandardMaterial({ color: '#1f2426', roughness: 0.95 }),
+export const floor = new Mesh(
+  new PlaneGeometry(20, 20),
+  new MeshStandardMaterial(),
 );
-xrSupportFloor.name = 'XR support floor';
-xrSupportFloor.rotation.x = -Math.PI * 0.5;
+floor.name = 'Floor';
+floor.rotation.x = -Math.PI * 0.5;

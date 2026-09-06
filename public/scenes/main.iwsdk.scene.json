@@ -38,12 +38,12 @@
   },
   "nodes": [
     {
-      "id": "xr-support-floor",
-      "name": "XR support floor",
+      "id": "floor",
+      "name": "Floor",
       "framingRole": "support",
       "content": {
         "type": "asset",
-        "asset": "xr-support-floor",
+        "asset": "floor",
         "receiveShadow": true
       },
       "components": {

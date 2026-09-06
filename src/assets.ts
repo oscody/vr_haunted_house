@@ -7,8 +7,8 @@
 
 import { AssetType, defineAssets } from '@iwsdk/core';
 import {
+  floor,
   temporarySphere,
-  xrSupportFloor,
 } from './scene-assets/starter-primitives.scene-asset.js';
 
 const publicAssetUrl = (filePath: string): string =>
@@ -26,8 +26,8 @@ function stockAssetUrl(assetId: string, fileName: string): string {
 }
 
 export default defineAssets({
+  floor,
   'temporary-sphere': temporarySphere,
-  'xr-support-floor': xrSupportFloor,
   'welcome-panel': {
     url: publicAssetUrl('ui/welcome.uikitml'),
     type: AssetType.UIKitML,
