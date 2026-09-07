@@ -69,6 +69,19 @@
       }
     },
     {
+      "id": "graves",
+      "name": "Graves",
+      "content": {
+        "type": "asset",
+        "asset": "graves",
+        "castShadow": true,
+        "receiveShadow": true
+      },
+      "transform": {
+        "position": [0, 0, -3]
+      }
+    },
+    {
       "id": "temporary-sphere",
       "name": "Temporary sphere",
       "content": {

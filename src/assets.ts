@@ -8,6 +8,7 @@
 import { AssetType, defineAssets } from '@iwsdk/core';
 import {
   floor,
+  graves,
   house,
   temporarySphere,
 } from './scene-assets/starter-primitives.scene-asset.js';
@@ -28,6 +29,7 @@ function stockAssetUrl(assetId: string, fileName: string): string {
 
 export default defineAssets({
   floor,
+  graves,
   house,
   'temporary-sphere': temporarySphere,
   'welcome-panel': {

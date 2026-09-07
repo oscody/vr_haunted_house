@@ -97,6 +97,21 @@ bushColorTexture.wrapS = RepeatWrapping;
 bushARMTexture.wrapS = RepeatWrapping;
 bushNormalTexture.wrapS = RepeatWrapping;
 
+const graveColorTexture = textureLoader.load(
+  publicAssetUrl('textures/plastered_stone_wall_diff_1k.webp'),
+);
+const graveARMTexture = textureLoader.load(
+  publicAssetUrl('textures/plastered_stone_wall_arm_1k.webp'),
+);
+const graveNormalTexture = textureLoader.load(
+  publicAssetUrl('textures/plastered_stone_wall_nor_gl_1k.webp'),
+);
+
+graveColorTexture.colorSpace = SRGBColorSpace;
+graveColorTexture.repeat.set(0.3, 0.4);
+graveARMTexture.repeat.set(0.3, 0.4);
+graveNormalTexture.repeat.set(0.3, 0.4);
+
 export const temporarySphere = new Mesh(
   new SphereGeometry(1, 32, 32),
   new MeshStandardMaterial({ color: '#f2f2f2', roughness: 0.7 }),
@@ -197,3 +212,39 @@ bush4.position.set(-1, 0.05, 2.6);
 bush4.rotation.x = -0.75;
 
 house.add(bush1, bush2, bush3, bush4);
+
+const graveGeometry = new BoxGeometry(0.6, 0.8, 0.2);
+const graveMaterial = new MeshStandardMaterial({
+  map: graveColorTexture,
+  normalMap: graveNormalTexture,
+  aoMap: graveARMTexture,
+  roughnessMap: graveARMTexture,
+  metalnessMap: graveARMTexture,
+});
+
+export const graves = new Group();
+graves.name = 'Graves';
+
+let graveSeed = 1337;
+const graveRandom = (): number => {
+  graveSeed = (graveSeed * 1664525 + 1013904223) >>> 0;
+  return graveSeed / 0x100000000;
+};
+
+for (let i = 0; i < 30; i += 1) {
+  const angle = graveRandom() * Math.PI * 2;
+  const radius = 3 + graveRandom() * 4;
+  const x = Math.sin(angle) * radius;
+  const z = Math.cos(angle) * radius;
+
+  const grave = new Mesh(graveGeometry, graveMaterial);
+  grave.name = `Grave ${i + 1}`;
+  grave.position.x = x;
+  grave.position.y = graveRandom() * 0.4;
+  grave.position.z = z;
+  grave.rotation.x = (graveRandom() - 0.5) * 0.4;
+  grave.rotation.y = (graveRandom() - 0.5) * 0.4;
+  grave.rotation.z = (graveRandom() - 0.5) * 0.4;
+
+  graves.add(grave);
+}
