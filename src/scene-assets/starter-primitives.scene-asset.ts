@@ -54,6 +54,30 @@ roofColorTexture.wrapS = RepeatWrapping;
 roofARMTexture.wrapS = RepeatWrapping;
 roofNormalTexture.wrapS = RepeatWrapping;
 
+const doorColorTexture = textureLoader.load(
+  publicAssetUrl('textures/door_color.jpg'),
+);
+const doorAlphaTexture = textureLoader.load(
+  publicAssetUrl('textures/door_alpha.jpg'),
+);
+const doorAmbientOcclusionTexture = textureLoader.load(
+  publicAssetUrl('textures/door_ambientOcclusion.jpg'),
+);
+const doorHeightTexture = textureLoader.load(
+  publicAssetUrl('textures/door_height.jpg'),
+);
+const doorNormalTexture = textureLoader.load(
+  publicAssetUrl('textures/door_normal.jpg'),
+);
+const doorMetalnessTexture = textureLoader.load(
+  publicAssetUrl('textures/door_metalness.jpg'),
+);
+const doorRoughnessTexture = textureLoader.load(
+  publicAssetUrl('textures/door_roughness.jpg'),
+);
+
+doorColorTexture.colorSpace = SRGBColorSpace;
+
 export const temporarySphere = new Mesh(
   new SphereGeometry(1, 32, 32),
   new MeshStandardMaterial({ color: '#f2f2f2', roughness: 0.7 }),
@@ -98,3 +122,23 @@ roof.name = 'Roof';
 roof.position.y = 2.5 + 0.75;
 roof.rotation.y = Math.PI * 0.25;
 house.add(roof);
+
+const door = new Mesh(
+  new PlaneGeometry(2.2, 2.2, 100, 100),
+  new MeshStandardMaterial({
+    map: doorColorTexture,
+    transparent: true,
+    alphaMap: doorAlphaTexture,
+    aoMap: doorAmbientOcclusionTexture,
+    displacementMap: doorHeightTexture,
+    displacementScale: 0.15,
+    displacementBias: -0.04,
+    normalMap: doorNormalTexture,
+    metalnessMap: doorMetalnessTexture,
+    roughnessMap: doorRoughnessTexture,
+  }),
+);
+door.name = 'Door';
+door.position.y = 1;
+door.position.z = 2 + 0.01;
+house.add(door);
